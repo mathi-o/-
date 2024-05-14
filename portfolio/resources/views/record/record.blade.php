@@ -20,7 +20,7 @@
         <td>日付:{{ $data->date}}<br>
         <td>場所:{{ $data->location }}<br>
         <td>タイトル:{{ $data->title }}<br>
-        <td>写真:<img src="{{ asset('storage/avatar' . $data->photo) }}" /><br>
+        <td>写真:<img src="{{ asset('storage/' . $data->photo) }}" /><br>
         <td>感想:{{ $data->impression }}<br>
     </div>
 @endforeach

@@ -17,12 +17,16 @@ class UploadController extends Controller
 //ddd($datum);
 
 
-        $image_path = $request ->file('photo')->store('public/avatar/');
-
+        $image_path = $request ->file('photo')->store('public/avatar');
+        $result = substr($image_path, strpos($image_path, "/") + 1);
+        $datum['photo'] = $result;
         $r = Entry::create($datum);
-        $r->photo = $image_path;
+
 
         return redirect()->route('record')->with('success','追加に成功しました！');
 
     }
 }
+
+
+//"https://38fbb47958c0424b875ee9cb7ea5f32a.vfs.cloud9.ap-northeast-1.amazonaws.com/storage/avatar/3FJCSF0XFEF2sKaD86ueUHkW3VNyTqmJbphAZMW5.jpg"
