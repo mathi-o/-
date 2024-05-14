@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RecordController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+Route::get('/',[AuthController::class,'index'])->name('front.index');
+Route::post('/login',[AuthController::class,'login']);
+
+Route::middleware(['auth'])->group(function(){
+   Route::get('/top',[HomeController::class,'top'])->name('top');
+   Route::get('/record',[RecordController::class,'record'])->name('record');
+   Route::post('/upload',[UploadController::class,'upload'])->name('upload');
 });
