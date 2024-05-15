@@ -27,4 +27,5 @@ Route::middleware(['auth'])->group(function(){
    Route::get('/top',[HomeController::class,'top'])->name('top');
    Route::get('/record',[RecordController::class,'record'])->name('record');
    Route::post('/upload',[UploadController::class,'upload'])->name('upload');
+   Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 });

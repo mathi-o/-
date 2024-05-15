@@ -26,4 +26,12 @@ class AuthController extends Controller
         $request->session()->regenerate();
         return redirect()->intended('/top');
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request -> session() -> regenerateToken();
+        $request -> session() -> regenerate();
+
+        return redirect(route('front.index'));
+    }
 }

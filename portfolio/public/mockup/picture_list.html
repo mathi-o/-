@@ -1,0 +1,26 @@
+<!DOCTYPE>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>写真一覧</title>
+    </head>
+    <body>
+       <h1>写真一覧</h1>
+    @foreach ($records as $record)
+        <div>
+            <h3>{{ $record->title }} ({{ $record->date }})</h3>
+            <p>{{ $record->location }}</p>
+            @if ($record->photo)
+                <a href="{{ route('records.show', ['name' => $record->prefecture]) }}">
+                    <img src="{{ asset('storage/' . $record->photo) }}" alt="{{ $record->title }}" width="200">
+                </a>
+            @endif
+            <p>{{ $record->comment }}</p>
+            <p>都道府県: {{ $record->prefecture }}</p>
+        </div>
+    @endforeach
+
+    <a href="{{ route('records.index') }}">都道府県リストに戻る</a>
+    </body>
+</html>

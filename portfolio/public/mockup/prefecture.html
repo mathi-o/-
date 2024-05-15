@@ -1,0 +1,49 @@
+<!DOCTYPE>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>{{ $name }}</title>
+    </head>
+    <body>
+        <h1>{{ $name }}のページ</h1>
+        <h2>新しい記録を追加する</h2>
+    <form action="{{ route('upload', ['name' => $name]) }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div>
+            <label for="date">日付:</label>
+            <input type="date" name="date">
+        <div>
+            <label for="location">場所:</label>
+            <input type="text" name="location" >
+        </div>
+        <div>
+            <label for="title">タイトル:</label>
+            <input type="text" name="title" >
+        </div>
+        <div>
+            <label for="photo">写真:</label>
+            <input type="file" name="photo">
+        </div>
+        <div>
+            <label for="impression">感想:</label>
+            <textarea id="comment" name="impression" ></textarea>
+        </div>
+        <button>記録を保存する</button>
+    </form>
+google map api 場所
+    <h2>過去の記録</h2>
+    @foreach ($records as $record)
+        <div>
+            <h3>{{ $record->title }} ({{ $record->date }})</h3>
+            <p>{{ $record->location }}</p>
+            @if ($record->photo)
+                <img src="{{ asset('uploads/' . $record->photo) }}" alt="{{ $record->title }}" width="200">
+            @endif
+            <p>{{ $record->comment }}</p>
+        </div>
+    @endforeach
+
+    <a href="{{ route('prefectures.index') }}">都道府県リストに戻る</a>
+    </body>
+</html>
