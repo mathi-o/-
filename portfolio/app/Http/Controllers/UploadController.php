@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class UploadController extends Controller
 {
     //
-    public function upload(UploadRequest $request)
+    public function upload(UploadRequest $request,$name)
     {
+
         $datum = $request->validated();
 //ddd($datum);
 
@@ -20,10 +21,11 @@ class UploadController extends Controller
         $image_path = $request ->file('photo')->store('public/avatar');
         $result = substr($image_path, strpos($image_path, "/") + 1);
         $datum['photo'] = $result;
+        $datum['prefecture'] = $name;
         $r = Entry::create($datum);
 
 
-        return redirect()->route('record')->with('success','追加に成功しました！');
+        return redirect()->route('record', ['name' => $name])->with('success','追加に成功しました！');
 
     }
 }

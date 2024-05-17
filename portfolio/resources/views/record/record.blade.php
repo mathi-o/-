@@ -1,8 +1,9 @@
 @extends('record.layout')
 
 @section('contents')
-
-<form action="{{route('upload')}}" method="post" enctype="multipart/form-data">
+<h1>{{$name}}のページ</h1>
+<h2>新しい記録を追加する</h2>
+<form action="{{route('upload', ['name' => $name])}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         日付:<input name="date" type="date"><br>
@@ -15,6 +16,7 @@
     </div>
 
 </form>
+<h2>今までの記録</h2>
 @foreach($list as $data)
     <div class="data">
         <td>日付:{{ $data->date}}<br>
@@ -22,8 +24,13 @@
         <td>タイトル:{{ $data->title }}<br>
         <td>写真:<img src="{{ asset('storage/' . $data->photo) }}" /><br>
         <td>感想:{{ $data->impression }}<br>
+        <td><form action="/delete" method="post">
+            @csrf
+            @method("DELETE")
+            <button>削除する</button>
+        </form>
     </div>
 @endforeach
-
+<a href="{{route('top')}}">都道府県一覧に戻る</a>
 
 @endsection

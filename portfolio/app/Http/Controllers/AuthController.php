@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -26,6 +29,8 @@ class AuthController extends Controller
         $request->session()->regenerate();
         return redirect()->intended('/top');
     }
+
+    
 
     public function logout(Request $request){
         Auth::logout();

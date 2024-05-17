@@ -6,44 +6,28 @@
         <title>{{ $name }}</title>
     </head>
     <body>
-        <h1>{{ $name }}のページ</h1>
+        <h1>〇〇のページ</h1>
         <h2>新しい記録を追加する</h2>
     <form action="{{ route('upload', ['name' => $name]) }}" method="post" enctype="multipart/form-data">
         @csrf
         <div>
-            <label for="date">日付:</label>
-            <input type="date" name="date">
-        <div>
-            <label for="location">場所:</label>
-            <input type="text" name="location" >
-        </div>
-        <div>
-            <label for="title">タイトル:</label>
-            <input type="text" name="title" >
-        </div>
-        <div>
-            <label for="photo">写真:</label>
-            <input type="file" name="photo">
-        </div>
-        <div>
-            <label for="impression">感想:</label>
-            <textarea id="comment" name="impression" ></textarea>
+            日付:<input type="date" name="date"><br>
+            場所:<input type="text" name="location" ><br>
+            タイトル:<input type="text" name="title" ><br>
+            写真:<input type="file" name="photo"><br>
+            感想:<textarea name="impression" ></textarea><br>
         </div>
         <button>記録を保存する</button>
     </form>
 google map api 場所
     <h2>過去の記録</h2>
-    @foreach ($records as $record)
-        <div>
-            <h3>{{ $record->title }} ({{ $record->date }})</h3>
-            <p>{{ $record->location }}</p>
-            @if ($record->photo)
-                <img src="{{ asset('uploads/' . $record->photo) }}" alt="{{ $record->title }}" width="200">
-            @endif
-            <p>{{ $record->comment }}</p>
-        </div>
-    @endforeach
+        日付<br>
+        場所<br>
+        タイトル<br>
+        写真<br>
+        感想<br>
 
-    <a href="{{ route('prefectures.index') }}">都道府県リストに戻る</a>
+
+    <a href="/mockup/top.html">都道府県リストに戻る</a>
     </body>
 </html>

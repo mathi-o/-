@@ -8,9 +8,17 @@
     <body>
         <h1>都道府県リスト</h1>
         <ul>
-           @foreach ($prefectures as $prefecture)
-               <li><button><a href="{{ route('top',['name'=>$prefecture]) }}">{{ $prefecture }}</a></button> </li>
-           @endforeach
+           <button北海道</button>
+           <button>青森</button>
+           <button>岩手</button>
+           <button>宮城</button>
+           <button>秋田</button>
+           <button>山形</button>
+           <button>福島</button>
+            ・
+            ・
+            ・
+            <button>沖縄</button>
         </ul>
         <a href="{{route('logout')}}">ログアウト</a>
     </body>
