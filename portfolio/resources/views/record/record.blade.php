@@ -1,9 +1,11 @@
-@extends('record.layout')
+@extends('layout')
 
 @section('contents')
-<h1>{{$name}}のページ</h1>
-<h2>新しい記録を追加する</h2>
-<form action="{{route('upload', ['name' => $name])}}" method="post" enctype="multipart/form-data">
+<div class="title">
+    <h1>{{$name}}のページ</h1><br>
+    <h2>新しい記録を追加する</h2>
+</div>
+    <form action="{{route('upload', ['name' => $name])}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         日付:<input name="date" type="date"><br>
@@ -15,8 +17,8 @@
     <button type="submit">追加する</a></button><br>
     </div>
 
-</form>
-<h2>今までの記録</h2>
+    </form><br>
+<h2 class="title">今までの記録</h2><br>
 @foreach($list as $data)
     <div class="data">
         <td>日付:{{ $data->date}}<br>
@@ -31,6 +33,6 @@
         </form>
     </div>
 @endforeach
-<a href="{{route('top')}}">都道府県一覧に戻る</a>
+<a href="{{route('top')}}" class="title">都道府県一覧に戻る</a>
 
 @endsection

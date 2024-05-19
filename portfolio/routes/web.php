@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PictureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,5 @@ Route::middleware(['auth'])->group(function(){
    Route::post('/upload/{name}',[UploadController::class,'upload'])->name('upload');
    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
    Route::delete('/delete/{name}',[RecordController::class,'delete']);
+   Route::get('/picture',[PictureController::class,'picture'])->name('picture');
 });
