@@ -39,8 +39,19 @@ button:hover {
 }
 
 #map{
-  height: 100vh;
+  height: 60vh;
   width: 100%;
+}
+
+#search-box{
+  margin-top: 10px;
+}
+
+#pac-input{
+  margin-top: 10px;
+  width: 300px;
+  font-size: 14px;
+
 }
 
 .title{
@@ -61,9 +72,51 @@ button:hover {
 }
 
 .header{
+  height:100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: rgb(64, 101, 158);
+
+}
+.header > :first-child{
+  margin-right: auto;
+}
+
+.header-title{
+  margin-left: 40px;
+  color:rgb(231,208,169);
+}
+
+.header-menu{
+  margin-right: 20px;
+  ;
+}
+
+.link{
+  color:rgb(231,208,169)
+}
+
+.picture{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap:10px;
+  gap:20px;
+}
+
+.picture-item{
+  width: 250px;
+  text-align: center;
+
+}
+
+.picture-item img{
+  width: 100%;
+  height:auto;
+  border-radius: 10px;
+}
+
+.session{
+  margin: 0 auto;
+  text-align: center;
 }

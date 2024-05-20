@@ -16,7 +16,7 @@ class UploadController extends Controller
 
         $datum = $request->validated();
 //ddd($datum);
-
+        $datum['user_id'] = Auth::id();
 
         $image_path = $request ->file('photo')->store('public/avatar');
         $result = substr($image_path, strpos($image_path, "/") + 1);
@@ -24,8 +24,8 @@ class UploadController extends Controller
         $datum['prefecture'] = $name;
         $r = Entry::create($datum);
 
-
-        return redirect()->route('record', ['name' => $name])->with('success','追加に成功しました！');
+        $request -> session() -> flash('front.task_upload_success',true);
+        return redirect()->route('record', ['name' => $name]);
 
     }
 }

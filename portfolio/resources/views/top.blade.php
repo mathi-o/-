@@ -91,6 +91,6 @@
     <h1>日本地図</h1>
     <div id="map"></div>
 
-    <a href="{{route('logout')}}">ログアウト</a>
+    
 @endsection
 

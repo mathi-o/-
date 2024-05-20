@@ -29,9 +29,13 @@ Route::post('/register',[UserController::class,'register']);
 
 Route::middleware(['auth'])->group(function(){
    Route::get('/top',[HomeController::class,'top'])->name('top');
-   Route::get('/record/{name}',[RecordController::class,'record'])->name('record');
+   Route::get('/record/{name}',[RecordController::class,'record',])->name('record',);
+   //Route::get('/record/{name}',[RecordController::class,'map'])->name('map');
    Route::post('/upload/{name}',[UploadController::class,'upload'])->name('upload');
    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
-   Route::delete('/delete/{name}',[RecordController::class,'delete']);
+   Route::delete('/edit/{name}/{id}',[RecordController::class,'delete'])->whereNumber('id')->name('delete');
    Route::get('/picture',[PictureController::class,'picture'])->name('picture');
+   Route::get('/edit/{name}/{id}',[RecordController::class,'edit'])->whereNumber('id')->name('edit');
+   Route::put('/edit/{name}/{id}',[RecordController::class,'editSave'])->whereNumber('id')->name('edit_save');
 });
+
