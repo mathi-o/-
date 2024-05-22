@@ -22,12 +22,14 @@
             </div>
         </div>
     </header>
-    <body>
+    <body class="body">
         @yield('contents')
     </body>
     <footer>
         <div class="footer">
-            ©webcamp
+            <div class="footer-title">
+                ©webcamp
+            </div>
         </div>
     </footer>
 </html>

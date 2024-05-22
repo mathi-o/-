@@ -6,7 +6,8 @@
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 35.682839, lng: 139.759455},
-                zoom: 7
+                zoom: 7,
+                gestureHandling: 'auto'
             });
 
             var input = document.getElementById('pac-input');
@@ -60,14 +61,66 @@
                 });
                 map.fitBounds(bounds);
             });
+
+            @foreach($places as $place)
+                var marker = new google.maps.Marker({
+                    position: { lat: {{ $place->latitude }}, lng: {{ $place->longitude }} },
+                    map: map,
+                    title: '{{ $place->location }}'
+                });
+                markers.push(marker);
+            @endforeach
         }
+
         google.maps.event.addDomListener(window, 'load', initMap);
+
+    function initAutocomplete() {
+            var input = document.getElementById('location');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.addListener('place_changed', function () {
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    return;
+                }
+
+
+                document.getElementById('location').value = place.name;
+                document.getElementById('latitude').value = place.geometry.location.lat();
+                document.getElementById('longitude').value = place.geometry.location.lng();
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initAutocomplete);
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInput = document.getElementById('file-upload');
+            const fileNameDisplay = document.getElementById('filename');
+
+            fileInput.addEventListener('change', function () {
+                if (fileInput.files.length > 0) {
+                    fileNameDisplay.textContent = fileInput.files[0].name;
+                } else {
+                    fileNameDisplay.textContent = '';
+                }
+            });
+        });
     </script>
 @endsection
 
 @section('contents')
 <div class="title">
     <h1>{{$name}}のページ</h1><br>
+
+    @if ($errors->any())
+        <div>
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
+
     @if(session('front.task_delete_success')==true)
         <div class="session">
             記録を削除しました。<br>
@@ -84,11 +137,32 @@
     <form action="{{route('upload', ['name' => $name])}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-        日付:<input name="date" type="date"><br>
-        場所:<input name="location" type="text"><br>
-        タイトル:<input name="title" type="text"><br>
-        写真:<input name="photo" type="file"><br>
-        感想:<textarea name="impression" cols="50"></textarea><br>
+        日付<br>
+        <input name="date" type="date" class="form-text"><br>
+
+        場所<br>
+        <input name="location" id="location" type="text" class="form-text" ><br>
+
+        <input name="latitude" id="latitude" type="hidden" class="form-text" readonly>
+
+        <input name="longitude" id="longitude" type="hidden" class="form-text" readonly>
+
+        タイトル<br>
+        <input name="title" type="text" class="form-text"><br>
+
+        写真<br>
+        <div class="form-group">
+            <label for="file-upload" class="file-button">
+                 ファイルを選択
+            </label>
+            <input id="file-upload" type="file" name="photo" />
+            <span id="filename"></span>
+        </div>
+
+        感想<br>
+        <textarea name="impression" rows="3" cols="20" class="form-text"></textarea><br>
+
+
 
     <button type="submit">追加する</a></button><br>
     </div>
@@ -103,10 +177,10 @@
         <td>日付:{{ $data->date}}<br>
         <td>場所:{{ $data->location }}<br>
         <td>タイトル:{{ $data->title }}<br>
-        <td>写真:<img src="{{ asset('storage/' . $data->photo) }}" width="" /><br>
+        <td>写真:<img src="{{ asset('storage/' . $data->photo) }}" width="400",height="400" /><br>
         <td>感想:{{ $data->impression }}<br>
         <td><button><a href="{{route('edit', ['name' => $name, 'id' => $data->id])}}">編集画面</a></button>
-    </div>
+    </div><br>
 @endforeach
 <div class="title">
     <a href="{{route('top')}}">都道府県一覧に戻る</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Entry;
+use Illuminate\Support\Facades\Auth;
 
 class PictureController extends Controller
 {
@@ -20,12 +21,27 @@ class PictureController extends Controller
     ];
 
 
-    public function picture(){
-        $record = Entry::all()
-                        ->sortBy(function($entry){
+    public function picture(Request $request){
+        $query = Entry::where('user_id',Auth::id());
+
+        if($request->filled('prefecture')){
+            $query -> where('prefecture',$request->prefecture);
+        }
+
+        if($request->order == 'date_asc'){
+            $query -> orderBy('created_at','ASC');
+        }
+
+        if($request->order == 'date_desc'){
+            $query -> orderBy('created_at','DESC');
+        }
+
+        $record = $query->get();
+
+        $sortRecord = $record->sortBy(function($entry){
                            return array_search($entry->prefecture,$this->prefectures);
                         });
 
-        return view ('picture_list',compact('record'));
+        return view ('picture_list',['sortRecord'=>$sortRecord,'prefectures'=>$this->prefectures]);
     }
 }

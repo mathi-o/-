@@ -12,11 +12,14 @@ class RecordController extends Controller
     //
     public function record($name)
     {
-        $list = Entry::where('prefecture',$name)
-                        ->get();
+        $list = Entry::where('user_id',Auth::id())
+                            ->where('prefecture',$name)
+                            ->get();
         $apiKey = env('GOOGLE_MAPS_API_KEY');
+        $places = Entry::where('prefecture',$name)->get();
+        $apikey = config('services.google.maps_api_key');
         //dd($apiKey);
-        return view('record.record',compact('list','name','apiKey'));
+        return view('record.record',compact('list','name','apiKey','places','apikey'));
     }
 
     public function getEntry($id)
@@ -86,6 +89,12 @@ class RecordController extends Controller
         return redirect(route('record',compact('name')));
     }
 
+    /*public function mapMarker($name){
+        $places = Entry::where('prefecture',$name)->get();
+        $apiKey = config('services.google.maps_api_key');
+ddd($places,$apiKey);
 
+        return view('record.record',compact('name','places','apiKey'));
+    }*/
 
 }

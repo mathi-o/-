@@ -8,25 +8,21 @@
 
 
 .container{
-
   display: flex;
   flex-wrap: wrap;
-
-  gap: 10px;
-
+  align-content: flex-start;
+  gap: 5px;
 }
-.prefecture{
-flex:1 1 auto;
 
-}
 
 button {
     padding: 10px 20px;
     border: none;
-    background-color: #007BFF;
+    background-color: rgb(64, 101, 158);
     color: white;
     cursor: pointer;
-    text-align: center;
+    border-radius: 10px;
+
 }
 
 button a {
@@ -35,8 +31,37 @@ button a {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: rgb(0, 86, 179);
 }
+
+
+
+
+.file-button {
+    display: inline-block;
+    padding: 3px 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: black;
+    font-size: 14px;
+}
+
+.file-button:hover {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+}
+
+#file-upload {
+    display: none;
+}
+#filename {
+    margin-left: 10px;
+    font-size: 14px;
+    color: black;
+}
+
 
 #map{
   height: 60vh;
@@ -54,18 +79,61 @@ button:hover {
 
 }
 
+.main-title{
+  font-size: 37px;
+  text-align:center;
+  color:rgb(231,208,169);
+}
+
 .title{
   margin: 0 auto;
   text-align: center;
+  color:rgb(231,208,169);
+}
+
+.form-text {
+    height: 2.4em;
+    width:300px;
+    padding: 0 16px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 0 0 1px #ccc inset;
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none
+
+}
+
+.form-text2 {
+    height: 2.4em;
+    width:200px;
+    padding: 0 16px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 0 0 1px #ccc inset;
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none
+
+}
+
+
+
+
+.form-text:focus,.form-text2:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
 }
 
 .form-group{
   margin:0 auto;
   text-align:center;
+  color:rgb(231,208,169);
 }
-.footer{
- text-align:center;
-}
+
 .data{
   margin:0 auto;
   text-align:center;
@@ -90,17 +158,42 @@ button:hover {
 
 .header-menu{
   margin-right: 20px;
-  ;
+}
+.link,.link:visited{
+  color:rgb(231,208,169);
+  Text-decoration:none;
 }
 
-.link{
-  color:rgb(231,208,169)
+.main-box{
+  height: 800px;
+
 }
+
+.body{
+
+}
+
+.footer{
+  width: 100%;
+  margin: 0 auto;
+  text-align:center;
+  height: 50px;
+  display: flex;
+  background-color: rgb(64, 101, 158);
+
+}
+.footer-title{
+  color:rgb(231,208,169);
+  margin: auto;
+}
+
+
 
 .picture{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap:20px;
 }
 
@@ -119,4 +212,43 @@ button:hover {
 .session{
   margin: 0 auto;
   text-align: center;
+}
+
+.hokkaidou{
+  display: flex;
+  justify-content:center;
+}
+
+.touhoku{
+  display: flex;
+  justify-content:center;
+}
+.kanntou{
+  display: flex;
+  justify-content:center;
+}
+.tyuubu{
+  display: flex;
+  justify-content:center;
+}
+.kinnki{
+  display: flex;
+  justify-content:center;
+
+}
+.tyuugoku{
+  display: flex;
+  justify-content:center;
+}
+.sikoku{
+  display: flex;
+  justify-content:center;
+}
+.kyusyu{
+  display: flex;
+  justify-content:center;
+}
+
+.space{
+  width: 100%;
 }

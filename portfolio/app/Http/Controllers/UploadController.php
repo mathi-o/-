@@ -27,7 +27,7 @@ class UploadController extends Controller
         $request -> session() -> flash('front.task_upload_success',true);
         return redirect()->route('record', ['name' => $name]);
 
-    }
+ }
 }
 
 

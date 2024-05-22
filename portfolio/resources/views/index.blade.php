@@ -1,18 +1,39 @@
 @extends('record.layout')
 
 @section('contents')
-<div class="index">
-    <h1>ログイン</h1>
-    @if( session('front.task_register_success' == true) )
-        登録しました！<br>
-    @endif
+<div class="main-box">
+    <div class="index">
+        <h1>ログイン</h1>
+        @if( session('front.task_register_success' )== true )
+            新規登録しました！<br>
+        @endif
+        @if ($errors->any())
+            <div>
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
+            </div>
+        @endif
 
-    <form action="/login" method="post">
+        <form action="/login" method="post">
         @csrf
-        email:<input name="email" value="{{ old('email') }}"><br>
-        password:<input name="password" type="password"><br>
-        <button>ログインする</button><br>
-    </form>
-    <a href="/register">新規登録</a>
+            <div>
+                <label for="email">Email</label>
+                <div>
+                    <input name="email" type="email" autocomplete="email" value="{{old('email')}}">
+                </div>
+            </div>
+            <div>
+                <label for="password">password</label>
+                <div>
+                    <input name="password" type="password">
+                </div>
+            </div>
+
+
+            <button style="margin-top:10">ログインする</button>
+            </form>
+        <button type="button" style="margin-top:10"><a href="/register" class="a-tagu">新規登録</a></button>
+    </div>
 </div>
 @endsection
