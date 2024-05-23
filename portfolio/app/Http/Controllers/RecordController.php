@@ -17,9 +17,8 @@ class RecordController extends Controller
                             ->get();
         $apiKey = env('GOOGLE_MAPS_API_KEY');
         $places = Entry::where('prefecture',$name)->get();
-        $apikey = config('services.google.maps_api_key');
         //dd($apiKey);
-        return view('record.record',compact('list','name','apiKey','places','apikey'));
+        return view('record.record',compact('list','name','apiKey','places'));
     }
 
     public function getEntry($id)
@@ -51,15 +50,24 @@ class RecordController extends Controller
 
     public function edit($name,$id)
     {
+        $record = $this->getEntry($id);
 
-        return $this->EntryRender($name,$id,'record.edit');
+        if($record === null){
+            return redirect(route('record',['name'=>$name]));
+        }
+
+        $apiKey = env('GOOGLE_MAPS_API_KEY');
+        $places = Entry::where('prefecture',$name)->get();
+//dd($name,$id,$apiKey,$places);
+        return view('record.edit',compact('record','name','apiKey','places'));
 
     }
 
-    public function editSave(UploadRequest $request,$id,$name)
+    public function editSave($name,$id,UploadRequest $request)
     {
         $datum = $request->validated();
         $record = $this->getEntry($id);
+    //dd($datum,$record);
         if($record === null){
             return redirect(route('record',compact('name')));
         }
@@ -71,8 +79,11 @@ class RecordController extends Controller
         $datum['photo'] = $result;
         $record->photo = $datum['photo'];
         $record->impression = $datum['impression'];
+        $record->latitude = $datum['latitude'];
+        $record->longitude = $datum['longitude'];
 
         $record->save();
+        $request-> session() ->flash('front.task_editSave_success',true);
         return redirect(route('record',compact('name')));
 
     }

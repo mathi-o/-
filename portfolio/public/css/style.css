@@ -178,6 +178,9 @@ li{
   text-align:center;
 }
 
+.data-position{
+  margin-bottom: 10px;
+}
 
 
 @media screen and (max-width: 479px) {

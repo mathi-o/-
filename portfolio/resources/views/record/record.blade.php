@@ -120,10 +120,14 @@
             @endforeach
         </div>
     @endif
-
+    @if(session('front.task_editSave_success')==true)
+        <div class="session">
+            記録を編集しました！<br>
+        </div>
+    @endif
     @if(session('front.task_delete_success')==true)
         <div class="session">
-            記録を削除しました。<br>
+            記録を削除しました！<br>
         </div>
     @endif
     @if(session('front.task_upload_success')==true)
@@ -174,12 +178,17 @@
 <h2 class="title">今までの記録</h2><br>
 @foreach($list as $data)
     <div class="data">
-        <td>日付:{{ $data->date}}<br>
-        <td>場所:{{ $data->location }}<br>
-        <td>タイトル:{{ $data->title }}<br>
-        <td>写真:<img src="{{ asset('storage/' . $data->photo) }}" width="400",height="400" /><br>
-        <td>感想:{{ $data->impression }}<br>
-        <td><button><a href="{{route('edit', ['name' => $name, 'id' => $data->id])}}">編集画面</a></button>
+        <div class="title">日付</div>
+        <div class="data-position">{{ $data->date}}</div>
+        <div class="title">場所</div>
+        <div class="data-position">{{ $data->location }}</div>
+        <div class="title">タイトル</div>
+        <div class="data-position">{{ $data->title }}</div>
+        <div class="title">写真</div>
+        <div class="data-position"><img src="{{ asset('storage/' . $data->photo) }}" width="400",height="400" /></div>
+        <div class="title">感想</div>
+        <div class="data-position">{{ $data->impression }}</div>
+        <div class="data-position"><button><a href="{{route('edit', ['name' => $name, 'id' => $data->id])}}">編集画面</a></button></div>
     </div><br>
 @endforeach
 <div class="title">
