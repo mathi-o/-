@@ -5,16 +5,24 @@
 }
 
 
-
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+}
 
 .container{
-  display: flex;
-  flex-wrap: wrap;
+
   align-content: flex-start;
   gap: 5px;
 }
 
-
+@media screen and (max-width: 425px) {
+  button  {
+    font-size: 10px;
+  }
+}
 button {
     padding: 10px 20px;
     border: none;
@@ -89,7 +97,38 @@ button:hover {
   margin: 0 auto;
   text-align: center;
   color:rgb(231,208,169);
+  size: 2em;
 }
+
+
+
+.box{
+  width: 100%;
+}
+
+.HowTotitle-Box{
+  display: flex;
+  align-items: center;
+}
+
+.HowTotitle{
+  color:rgb(231,208,169);
+  size: 2em;
+}
+
+.HowTotitle2{
+  color:rgb(231,208,169);
+  size: 2em;
+}
+
+p,li{
+  color: rgb(46, 81, 134);
+  overflow-wrap: break-word;
+}
+li{
+  margin-left: 30px;
+}
+
 
 .form-text {
     height: 2.4em;
@@ -139,47 +178,76 @@ button:hover {
   text-align:center;
 }
 
+
+
+@media screen and (max-width: 479px) {
+  .header,body  {
+    font-size: 10.5px;
+  }
+  .header-title{
+    font-size: 1.7em;
+
+  }
+  .main-title{
+    font-size: 2em;
+  }
+  .HowTotitle{
+    font-size:1.7em;
+  }
+  .link,.link:visited{
+  Text-decoration:none;
+  font-size:0.8em
+  }
+}
+
 .header{
   height:100px;
   width: 100%;
   display: flex;
   align-items: center;
   background-color: rgb(64, 101, 158);
-
+  font-size: 16px;
 }
+
 .header > :first-child{
   margin-right: auto;
 }
 
 .header-title{
-  margin-left: 40px;
+  margin-left: 30px;
   color:rgb(231,208,169);
+
+}
+
+.menu-box{
+  width: 39.5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .header-menu{
-  margin-right: 20px;
+  margin-right: 10px;
 }
 .link,.link:visited{
   color:rgb(231,208,169);
   Text-decoration:none;
 }
 
-.main-box{
-  height: 800px;
 
-}
 
-.body{
 
-}
 
-.footer{
+footer{
   width: 100%;
-  margin: 0 auto;
+  margin: 10px 0 auto;
   text-align:center;
-  height: 50px;
+  height: 3.1em;
   display: flex;
   background-color: rgb(64, 101, 158);
+  position: sticky;
+  top: 100vh;
+  bottom: 0;
 
 }
 .footer-title{
@@ -193,14 +261,13 @@ button:hover {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  align-content: flex-start;
   gap:20px;
 }
 
 .picture-item{
-  width: 250px;
+  width: 300px;
   text-align: center;
-
 }
 
 .picture-item img{
@@ -217,38 +284,46 @@ button:hover {
 .hokkaidou{
   display: flex;
   justify-content:center;
+  flex-wrap: wrap;
 }
 
 .touhoku{
   display: flex;
   justify-content:center;
+  flex-wrap: wrap;
 }
 .kanntou{
   display: flex;
   justify-content:center;
+  flex-wrap: wrap;
 }
 .tyuubu{
   display: flex;
   justify-content:center;
+  flex-wrap: wrap;
 }
 .kinnki{
   display: flex;
   justify-content:center;
-
+  flex-wrap: wrap;
 }
 .tyuugoku{
   display: flex;
   justify-content:center;
+  flex-wrap: wrap;
 }
 .sikoku{
   display: flex;
   justify-content:center;
+  flex-wrap: wrap;
 }
 .kyusyu{
   display: flex;
   justify-content:center;
+  flex-wrap: wrap;
 }
 
 .space{
   width: 100%;
 }
+

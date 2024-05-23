@@ -36,5 +36,6 @@ Route::middleware(['auth'])->group(function(){
    Route::get('/picture',[PictureController::class,'picture'])->name('picture');
    Route::get('/edit/{name}/{id}',[RecordController::class,'edit'])->whereNumber('id')->name('edit');
    Route::put('/edit/{name}/{id}',[RecordController::class,'editSave'])->whereNumber('id')->name('edit_save');
+   Route::get('/How_to',[AuthController::class,'howto'])->name('HowTo');
 });
 

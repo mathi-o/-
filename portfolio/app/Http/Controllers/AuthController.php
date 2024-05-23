@@ -30,7 +30,7 @@ class AuthController extends Controller
         return redirect()->intended('/top');
     }
 
-    
+
 
     public function logout(Request $request){
         Auth::logout();
@@ -38,5 +38,9 @@ class AuthController extends Controller
         $request -> session() -> regenerate();
 
         return redirect(route('front.index'));
+    }
+
+    public function HowTo(){
+        return view('HowTo');
     }
 }

@@ -27,13 +27,13 @@
         <div class="picture">
             @foreach($sortRecord as $data)
                 <div class="picture-item">
-                    <img src="{{ asset('storage/' . $data->photo) }}" alt="{{ $data->title }}" width="250">
+                    <img src="{{ asset('storage/' . $data->photo) }}" alt="{{ $data->title }}">
                     <p>{{ $data->prefecture }}:{{$data->location}}</p>
                 </div>
             @endforeach
         </div>
     </div>
     <div class="title">
-        <a href="{{route('top')}}">都道府県リストに戻る</a>
+        <button><a href="{{route('top')}}" class="a-tagu">都道府県リストに戻る</a></button>
     </div>
 @endsection

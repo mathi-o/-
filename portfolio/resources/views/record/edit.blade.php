@@ -31,6 +31,5 @@
 
     </form><br>
 
-<a href="{{route('top')}}" class="title">都道府県一覧に戻る</a>
 
 @endsection

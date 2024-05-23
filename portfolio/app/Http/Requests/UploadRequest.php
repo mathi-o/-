@@ -25,8 +25,8 @@ class UploadRequest extends FormRequest
             'title'=>['required','string','max:255'],
             'photo'=>['required','image','file','max:4096'],
             'impression'=>['nullable','string'],
-            'latitude'=>['required','numeric'],
-            'longitude'=>['required','numeric']
+            'latitude'=>['nullable','numeric'],
+            'longitude'=>['nullable','numeric']
         ];
     }
 }

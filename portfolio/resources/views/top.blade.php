@@ -79,7 +79,7 @@
 @endsection
 @section('contents')
     <h1 class="main-title">都道府県リスト</h1>
-    <div class="box">
+    <div>
         <div class="container">
             <h2 class="title">北海道地方</h2>
             <div class="hokkaidou">
@@ -148,7 +148,7 @@
                 @endforeach
             </div>
         </div>
-    </div><br>
+    </div><br><br><br>
 
     <h1 class="main-title">日本地図</h1>
     <div id="map"></div>

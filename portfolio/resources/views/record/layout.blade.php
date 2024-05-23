@@ -6,15 +6,16 @@
         <title>@yield('title')</title>
         <link rel="stylesheet" href="{{ asset('css/style2.css') }}">
     </head>
-    <header class="header">
+    <header>
         <div>
-            <h1 class="header-title">me-trip</h1></h1>
+            <h1 class="header-title">me-trip</h1><br><br>
         </div>
+        
     </header>
-    <body>
+    <body class="body">
         @yield('contents')
     </body>
-    <footer class="footer">
+    <footer>
         <div class="footer-title">
             ©webcamp
         </div>

@@ -183,6 +183,6 @@
     </div><br>
 @endforeach
 <div class="title">
-    <a href="{{route('top')}}">都道府県一覧に戻る</a>
+    <button><a href="{{route('top')}}" class="a-tagu" >都道府県一覧に戻る</a></button>
 </div>
 @endsection
