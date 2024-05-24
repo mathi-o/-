@@ -185,7 +185,7 @@
         <div class="title">タイトル</div>
         <div class="data-position">{{ $data->title }}</div>
         <div class="title">写真</div>
-        <div class="data-position"><img src="{{ asset('storage/' . $data->photo) }}" width="400",height="400" /></div>
+        <div class="data-position"><img src="{{ Storage::disk('s3')->url($data->photo) }}" width="400",height="400" /></div>
         <div class="title">感想</div>
         <div class="data-position">{{ $data->impression }}</div>
         <div class="data-position"><button><a href="{{route('edit', ['name' => $name, 'id' => $data->id])}}">編集画面</a></button></div>
