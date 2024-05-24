@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>@yield('title')</title>
+        <title>me-trip@yield('title')</title>
         <link rel="stylesheet" href="{{ asset('css/style2.css') }}">
     </head>
     <header>
         <div>
             <h1 class="header-title">me-trip</h1><br><br>
         </div>
-        
+
     </header>
     <body class="body">
         @yield('contents')
