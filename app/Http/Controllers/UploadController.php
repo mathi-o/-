@@ -7,6 +7,7 @@ use App\Http\Requests\UploadRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UploadController extends Controller
 {
