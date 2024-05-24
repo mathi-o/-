@@ -186,3 +186,21 @@
         return redirect()->route('record', ['name' => $name]);
 
  }
+ 
+ 
+ 
+ public function upload(UploadRequest $request,$name)
+    {
+        $datum = $request -> validated();
+        $datum['user_id'] = Auth::id();
+        $file = $datum['photo'];
+        $path = Storage::disk('s3')->putFile('uploads', $file, 'public');
+        $datum['photo'] = $path;
+        \Log::info('Uploaded file path: ' . $path);
+        $datum['prefecture'] = $name;
+        $r = Entry::create($datum);
+
+        $request -> session() -> flash('front.task_upload_success',true);
+        return redirect()->route('record', ['name' => $name]);
+    }
+}
