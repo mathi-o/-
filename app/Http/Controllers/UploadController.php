@@ -13,24 +13,17 @@ class UploadController extends Controller
     //
     public function upload(UploadRequest $request,$name)
     {
-
-        $datum = $request->validated();
-//ddd($datum);
+        $datum = $request -> validated();
         $datum['user_id'] = Auth::id();
-
-        $image_path = $request ->file('photo')->store('public/avatar');
-        $result = substr($image_path, strpos($image_path, "/") + 1);
-        $path = Storage::disk('s3')->put('/',$result,'public');
+        $file = $datum['photo'];
+        $path = Storage::disk('s3')->put('/',$file, 'public');
         $datum['photo'] = $path;
-
         $datum['prefecture'] = $name;
-        //ddd($datum);
         $r = Entry::create($datum);
 
         $request -> session() -> flash('front.task_upload_success',true);
         return redirect()->route('record', ['name' => $name]);
-
- }
+    }
 }
 
 

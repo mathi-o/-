@@ -140,7 +140,24 @@
         return redirect()->route('record', ['name' => $name]);
 
  }
- 
+
+ {$datum = $request->validated();
+//ddd($datum);
+        $datum['user_id'] = Auth::id();
+
+        $image_path = $request ->file('photo')->store('public/avatar');
+        $result = substr($image_path, strpos($image_path, "/") + 1);
+        ddd($result);
+        $path = Storage::disk('s3')->put('/',$result,'public');
+        $datum['photo'] = $path;
+
+        $datum['prefecture'] = $name;
+        //ddd($datum);
+        $r = Entry::create($datum);
+
+        $request -> session() -> flash('front.task_upload_success',true);
+        return redirect()->route('record', ['name' => $name]);}
+
  public function upload(UploadRequest $request,$name)
     {
 
