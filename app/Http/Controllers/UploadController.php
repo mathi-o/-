@@ -16,7 +16,7 @@ class UploadController extends Controller
         $datum = $request -> validated();
         $datum['user_id'] = Auth::id();
         $file = $datum['photo'];
-        $path = Storage::disk('s3')->put('/',$file, 'public');
+        $path = Storage::disk('s3')->putFile('uploads', $file, 'public');
         $datum['photo'] = $path;
         $datum['prefecture'] = $name;
         $r = Entry::create($datum);
