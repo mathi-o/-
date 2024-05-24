@@ -24,7 +24,7 @@ class UploadController extends Controller
         $datum['photo'] = $path;
 
         $datum['prefecture'] = $name;
-        ddd($datum);
+        //ddd($datum);
         $r = Entry::create($datum);
 
         $request -> session() -> flash('front.task_upload_success',true);
