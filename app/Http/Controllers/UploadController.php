@@ -20,7 +20,7 @@ class UploadController extends Controller
         try {
         // S3にアップロード
             $image_path = $request->file('photo')->store('avatar', 's3');
-            ddd($image_path);
+            
             if ($image_path === false) {
             // ファイルのアップロードに失敗した場合の処理
             return redirect()->back()->withErrors(['photo' => 'ファイルのアップロードに失敗しました。']);
