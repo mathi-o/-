@@ -13,10 +13,12 @@ class UploadController extends Controller
     //
     public function upload(UploadRequest $request,$name)
     {
-        $datum = $request -> validated();
-        $datum['user_id'] = Auth::id();
-        if ($request->hasFile('photo')) {
+    $datum = $request->validated();
+    $datum['user_id'] = Auth::id();
+
+    if ($request->hasFile('photo')) {
         $file = $request->file('photo');
+        Log::info('Uploading file: ' . $file->getClientOriginalName());
         $path = Storage::disk('s3')->put('uploads', $file, 'public');
         if ($path) {
             Log::info('File uploaded to S3: ' . $path);
@@ -33,7 +35,6 @@ class UploadController extends Controller
 
     $request->session()->flash('front.task_upload_success', true);
     return redirect()->route('record', ['name' => $name]);
-}
     }
 }
 
