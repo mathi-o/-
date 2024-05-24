@@ -88,11 +88,55 @@
             @endforeach
 
         </div>
-        
-        
-        
+
+
+
 <td><form action="{{route('delete',['name'=>$data->prefecture])}}" method="post">
             @csrf
             @method("DELETE")
             <button onclick='return confirm("この記録を削除します(削除したら戻せません)。よろしいですか？");'>記録を削除する</button>
         </form>
+
+
+
+        config/filesystems.php
+
+    disks{
+
+    //ほかのディスク設定
+
+    's3' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
+        ],
+        変更前
+
+
+
+    }
+
+    public function upload(UploadRequest $request,$name)
+    {
+
+        $datum = $request->validated();
+//ddd($datum);
+        $datum['user_id'] = Auth::id();
+
+        $image_path = $request ->file('photo')->store('public/avatar');
+        $result = substr($image_path, strpos($image_path, "/") + 1);
+        $datum['photo'] = $result;
+
+        $datum['prefecture'] = $name;
+        $r = Entry::create($datum);
+
+        $request -> session() -> flash('front.task_upload_success',true);
+        return redirect()->route('record', ['name' => $name]);
+
+ }

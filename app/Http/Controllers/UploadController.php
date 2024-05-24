@@ -15,17 +15,15 @@ class UploadController extends Controller
     {
 
         $datum = $request->validated();
-//ddd($datum);
         $datum['user_id'] = Auth::id();
 
-        $image_path = $request ->file('photo')->store('public/avatar');
-        $result = substr($image_path, strpos($image_path, "/") + 1);
-        $datum['photo'] = $result;
+        $image_path = $request->file('photo')->store('avatar', 's3');
+        $datum['photo'] = Storage::disk('s3')->url($image_path);
 
         $datum['prefecture'] = $name;
         $r = Entry::create($datum);
 
-        $request -> session() -> flash('front.task_upload_success',true);
+        $request->session()->flash('front.task_upload_success', true);
         return redirect()->route('record', ['name' => $name]);
 
  }
