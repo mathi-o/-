@@ -17,8 +17,20 @@ class UploadController extends Controller
         $datum = $request->validated();
         $datum['user_id'] = Auth::id();
 
-        $image_path = $request->file('photo')->store('avatar', 's3');
+        try {
+        // S3にアップロード
+            $image_path = $request->file('photo')->store('avatar', 's3');
+            if ($image_path === false) {
+            // ファイルのアップロードに失敗した場合の処理
+            return redirect()->back()->withErrors(['photo' => 'ファイルのアップロードに失敗しました。']);
+        }
+
+        // S3のURLを取得
         $datum['photo'] = Storage::disk('s3')->url($image_path);
+        } catch (\Exception $e) {
+            Log::error('File upload error: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['photo' => 'ファイルのアップロード中にエラーが発生しました。']);
+        }
 
         $datum['prefecture'] = $name;
         $r = Entry::create($datum);
