@@ -21,6 +21,7 @@ class UploadController extends Controller
         $image_path = $request ->file('photo')->store('public/avatar');
         $result = substr($image_path, strpos($image_path, "/") + 1);
         $datum['photo'] = $result;
+
         $datum['prefecture'] = $name;
         $r = Entry::create($datum);
 

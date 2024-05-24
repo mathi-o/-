@@ -126,17 +126,17 @@
     @method("PUT")
     <div class="form-group">
         日付<br>
-        <input name="date" type="date" class="form-text"><br>
+        <input name="date" type="date" class="form-text" value="{{$record->date}}"><br>
 
         場所<br>
-        <input name="location" id="location" type="text" class="form-text" ><br>
+        <input name="location" id="location" type="text" class="form-text" value="{{$record->location}}" ><br>
 
-        <input name="latitude" id="latitude" type="hidden" class="form-text" readonly>
+        <input name="latitude" id="latitude" type="hidden" class="form-text" value="{{$record->latitude}}" readonly>
 
-        <input name="longitude" id="longitude" type="hidden" class="form-text" readonly>
+        <input name="longitude" id="longitude" type="hidden" class="form-text" value="{{$record->longitude}}" readonly>
 
         タイトル<br>
-        <input name="title" type="text" class="form-text"><br>
+        <input name="title" type="text" class="form-text" value="{{$record->title}}" ><br>
 
         写真<br>
         <div class="form-group">
@@ -144,11 +144,11 @@
                  ファイルを選択
             </label>
             <input id="file-upload" type="file" name="photo" />
-            <span id="filename"></span>
+            <span id="filename">{{ $record->photo }}</span>
         </div>
 
         感想<br>
-        <textarea name="impression" rows="3" cols="20" class="form-text"></textarea><br>
+        <textarea name="impression" rows="3" cols="20" class="form-text">{{$record->impression}}</textarea><br>
 
     <button>編集完了</button><br><br>
     </form>
