@@ -20,7 +20,7 @@ class UploadController extends Controller
 
         $image_path = $request ->file('photo')->store('public/avatar');
         $result = substr($image_path, strpos($image_path, "/") + 1);
-        $path = Strage::disk('s3')->put('/',$result,'public');
+        $path = Storage::disk('s3')->put('/',$result,'public');
         $datum['photo'] = $path;
 
         $datum['prefecture'] = $name;
