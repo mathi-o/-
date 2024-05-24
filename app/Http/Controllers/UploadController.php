@@ -14,32 +14,29 @@ class UploadController extends Controller
     //
     public function upload(UploadRequest $request,$name)
     {
-        $datum = $request->validated();
-        $datum['user_id'] = Auth::id();
+    $datum = $request->validated();
+    $datum['user_id'] = Auth::id();
 
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            Log::info('Uploading file: ' . $file->getClientOriginalName());
-
-            // S3にアップロード
-            $path = Storage::disk('s3')->put('uploads', $file, 'public');
-            if ($path) {
-                Log::info('File uploaded to S3: ' . $path);
-                $datum['photo'] = $path;
-            } else {
-                Log::error('File upload to S3 failed.');
-                return back()->withErrors(['photo' => 'File upload to S3 failed.']);
-            }
+    if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        Log::info('Uploading file: ' . $file->getClientOriginalName());
+        $path = Storage::disk('s3')->put('uploads', $file, 'public');
+        if ($path) {
+            Log::info('File uploaded to S3: ' . $path);
+        } else {
+            Log::error('File upload to S3 failed.');
         }
-
-        $datum['prefecture'] = $name;
-        $r = Entry::create($datum);
-
-        $request->session()->flash('front.task_upload_success', true);
-        return redirect()->route('record', ['name' => $name]);
+        $datum['photo'] = $path;
+    } else {
+        Log::error('No file found in the request.');
     }
 
+    $datum['prefecture'] = $name;
+    $r = Entry::create($datum);
 
+    $request->session()->flash('front.task_upload_success', true);
+    return redirect()->route('record', ['name' => $name]);
+    }
 }
 
 
