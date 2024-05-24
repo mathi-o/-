@@ -21,16 +21,15 @@ class UploadController extends Controller
             $file = $request->file('photo');
             Log::info('Uploading file: ' . $file->getClientOriginalName());
 
-            // S3にファイルをアップロードし、パスを取得
+            // S3にアップロード
             $path = Storage::disk('s3')->put('uploads', $file, 'public');
             if ($path) {
                 Log::info('File uploaded to S3: ' . $path);
                 $datum['photo'] = $path;
             } else {
                 Log::error('File upload to S3 failed.');
+                return back()->withErrors(['photo' => 'File upload to S3 failed.']);
             }
-        } else {
-            Log::error('No file found in the request.');
         }
 
         $datum['prefecture'] = $name;
@@ -39,6 +38,8 @@ class UploadController extends Controller
         $request->session()->flash('front.task_upload_success', true);
         return redirect()->route('record', ['name' => $name]);
     }
+
+
 }
 
 
