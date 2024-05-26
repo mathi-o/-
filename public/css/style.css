@@ -180,7 +180,9 @@ li{
 
 .data-position{
   margin-bottom: 10px;
-  width: 300px;
+}
+.data-position > img{
+  width: 350px;
   height: 300px;
   object-fit: contain;
 }
