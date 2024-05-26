@@ -183,7 +183,7 @@ li{
 }
 .data-position > img{
   width: 300px;
-  height: 275px;
+  height: 200px;
   object-fit: contain;
 }
 
@@ -269,6 +269,7 @@ footer{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-content: flex-start;
   gap:20px;
 }
