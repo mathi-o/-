@@ -27,7 +27,7 @@
         <div class="picture">
             @foreach($sortRecord as $data)
                 <div class="picture-item">
-                    <img src="{{ asset('storage/' . $data->photo) }}" alt="{{ $data->title }}">
+                    <img src="{{ $data->photo) }}" alt="{{ $data->title }}">
                     <p>{{ $data->prefecture }}:{{$data->location}}</p>
                 </div>
             @endforeach
