@@ -140,6 +140,21 @@
         return redirect()->route('record', ['name' => $name]);
 
  }
+ 
+ 
+ 
+ $datum = $request -> validated();
+        $datum['user_id'] = Auth::id();
+        $file = $datum['photo'];
+
+        $path = Storage::disk('s3')->putFile('uploads', $file, 'public');
+        $datum['photo'] = $path;
+        \Log::info('Uploaded file path: ' . $path);
+        $datum['prefecture'] = $name;
+        $r = Entry::create($datum);
+
+        $request -> session() -> flash('front.task_upload_success',true);
+        return redirect()->route('record', ['name' => $name]);
 
  {$datum = $request->validated();
 //ddd($datum);
@@ -204,3 +219,27 @@
         return redirect()->route('record', ['name' => $name]);
     }
 }
+
+
+$datum = $request->validated();
+    $datum['user_id'] = Auth::id();
+
+    if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        Log::info('Uploading file: ' . $file->getClientOriginalName());
+        $path = Storage::disk('s3')->put('uploads', $file, 'public');
+        if ($path) {
+            Log::info('File uploaded to S3: ' . $path);
+        } else {
+            Log::error('File upload to S3 failed.');
+        }
+        $datum['photo'] = $path;
+    } else {
+        Log::error('No file found in the request.');
+    }
+
+    $datum['prefecture'] = $name;
+    $r = Entry::create($datum);
+
+    $request->session()->flash('front.task_upload_success', true);
+    return redirect()->route('record', ['name' => $name]);

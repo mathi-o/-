@@ -14,29 +14,22 @@ class UploadController extends Controller
     //
     public function upload(UploadRequest $request,$name)
     {
-    $datum = $request->validated();
-    $datum['user_id'] = Auth::id();
 
-    if ($request->hasFile('photo')) {
-        $file = $request->file('photo');
-        Log::info('Uploading file: ' . $file->getClientOriginalName());
-        $path = Storage::disk('s3')->put('uploads', $file, 'public');
-        if ($path) {
-            Log::info('File uploaded to S3: ' . $path);
-        } else {
-            Log::error('File upload to S3 failed.');
-        }
-        $datum['photo'] = $path;
-    } else {
-        Log::error('No file found in the request.');
-    }
+        $datum = $request->validated();
+//ddd($datum);
+        $datum['user_id'] = Auth::id();
 
-    $datum['prefecture'] = $name;
-    $r = Entry::create($datum);
+        $image_path = $request ->file('photo')->store('public/avatar');
+        $result = substr($image_path, strpos($image_path, "/") + 1);
+        $datum['photo'] = $result;
 
-    $request->session()->flash('front.task_upload_success', true);
-    return redirect()->route('record', ['name' => $name]);
-    }
+        $datum['prefecture'] = $name;
+        $r = Entry::create($datum);
+
+        $request -> session() -> flash('front.task_upload_success',true);
+        return redirect()->route('record', ['name' => $name]);
+
+ }
 }
 
 

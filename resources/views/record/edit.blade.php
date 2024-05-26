@@ -113,9 +113,11 @@
 <div class="title">
     <h1>{{$name}}のページ</h1><br>
     <h2>{{$record->location}}の編集画面</h2><br>
-    @if(session('front.task_delete_success'==true))
-        <div class="session">
-            記録を削除しました。<br>
+    @if ($errors->any())
+        <div>
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
         </div>
     @endif
 
@@ -141,10 +143,10 @@
         写真<br>
         <div class="form-group">
             <label for="file-upload" class="file-button">
-                 ファイルを選択
+                 変更したい場合はファイルを選択
             </label>
-            <input id="file-upload" type="file" name="photo" />
-            <span id="filename">{{ $record->photo }}</span>
+            <input id="file-upload" type="file" name="photo" >
+            <span id="filename"></span>
         </div>
 
         感想<br>

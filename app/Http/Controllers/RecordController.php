@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 use App\Http\Requests\UploadRequest;
+use App\Http\Requests\EditSaveRequest;
 use Illuminate\Support\Facades\Auth;
 
 class RecordController extends Controller
@@ -63,7 +64,7 @@ class RecordController extends Controller
 
     }
 
-    public function editSave($name,$id,UploadRequest $request)
+    public function editSave($name,$id,EditSaveRequest $request)
     {
         $datum = $request->validated();
         $record = $this->getEntry($id);
@@ -74,10 +75,13 @@ class RecordController extends Controller
         $record->date = $datum['date'];
         $record->location = $datum['location'];
         $record->title = $datum['title'];
-        $image_path = $request ->file('photo')->store('public/avatar');
-        $result = substr($image_path, strpos($image_path, "/") + 1);
-        $datum['photo'] = $result;
-        $record->photo = $datum['photo'];
+
+        if ($request-> hasFile('photo')){
+            $image_path = $request ->file('photo')->store('public/avatar');
+            $result = substr($image_path, strpos($image_path, "/") + 1);
+            $datum['photo'] = $result;
+            $record->photo = $datum['photo'];
+        }
         $record->impression = $datum['impression'];
         $record->latitude = $datum['latitude'];
         $record->longitude = $datum['longitude'];
