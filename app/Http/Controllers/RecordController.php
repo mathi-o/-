@@ -7,6 +7,7 @@ use App\Models\Entry;
 use App\Http\Requests\UploadRequest;
 use App\Http\Requests\EditSaveRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
@@ -77,9 +78,9 @@ class RecordController extends Controller
         $record->title = $datum['title'];
 
         if ($request-> hasFile('photo')){
-            $image_path = $request ->file('photo')->store('public/avatar');
-            $result = substr($image_path, strpos($image_path, "/") + 1);
-            $datum['photo'] = $result;
+            $file = $request->file('photo');
+            $path = Storage::disk('s3')->putFile('/photos', $file, 'public');
+            $datum['photo'] = $path;
             $record->photo = $datum['photo'];
         }
         $record->impression = $datum['impression'];
