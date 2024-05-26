@@ -275,8 +275,8 @@ footer{
 }
 
 .picture-item > img{
-  width: 325px;
-  height: 300px;
+  width: 320px;
+  height: 280px;
   object-fit: contain;
   border-radius: 7px;
 }
