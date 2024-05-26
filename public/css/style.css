@@ -279,6 +279,10 @@ footer{
   object-fit: contain;
   border-radius: 7px;
 }
+.picture-item > p{
+  text-align: center;
+  margin-bottom: 5px;
+}
 
 
 .session{
