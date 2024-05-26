@@ -80,7 +80,8 @@ class RecordController extends Controller
         if ($request-> hasFile('photo')){
             $file = $request->file('photo');
             $path = Storage::disk('s3')->putFile('/photos', $file, 'public');
-            $datum['photo'] = $path;
+            $URLpath = Storage::disk('s3')->url($path);
+            $datum['photo'] = $URLpath;
             $record->photo = $datum['photo'];
         }
         $record->impression = $datum['impression'];
