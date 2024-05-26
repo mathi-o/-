@@ -16,7 +16,7 @@
                 <a href="{{route('HowTo')}}" class="link">How To</a>
             </div>
             <div class="header-menu">
-                <a href="{{route('top')}}" class="link">都道府県一覧に戻る</a>
+                <a href="{{route('top')}}" class="link">都道府県一覧</a>
             </div>
             <div class="header-menu">
                 <a href="/picture" class="link">写真一覧</a>
