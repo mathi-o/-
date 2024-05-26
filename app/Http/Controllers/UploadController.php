@@ -7,7 +7,6 @@ use App\Http\Requests\UploadRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class UploadController extends Controller
 {
@@ -18,7 +17,7 @@ class UploadController extends Controller
         $datum['user_id'] = Auth::id();
 
         $file = $request->file('photo');
-        $path = Storage::disk('s3')->put('/', $file, 'public');
+        $path = Storage::disk('s3')->put('photos', $file, 'public');
         $URLPath = Storage::disk('s3')->url($path);
         $datum['photo'] = $URLPath;
         $datum['prefecture'] = $name;
@@ -30,5 +29,3 @@ class UploadController extends Controller
 
 }
 
-
-//"https://38fbb47958c0424b875ee9cb7ea5f32a.vfs.cloud9.ap-northeast-1.amazonaws.com/storage/avatar/3FJCSF0XFEF2sKaD86ueUHkW3VNyTqmJbphAZMW5.jpg"
