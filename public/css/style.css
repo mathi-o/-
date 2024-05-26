@@ -185,7 +185,7 @@ li{
 
 @media screen and (max-width: 479px) {
   .header,body  {
-    font-size: 10.5px;
+    font-size: 10px;
   }
   .header-title{
     font-size: 1.7em;
@@ -199,7 +199,7 @@ li{
   }
   .link,.link:visited{
   Text-decoration:none;
-  font-size:0.6em
+  font-size:0.5em
   }
 }
 
