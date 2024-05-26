@@ -19,7 +19,7 @@ class UploadController extends Controller
 
         $file = $request->file('photo');
         $path = Storage::disk('s3')->put('photos', $file, 'public');
-        $URLpath = Storage::disk('s3')->url('image.jpg');
+        $URLpath = Storage::disk('s3')->url($file);
         $datum['photo'] = $URLpath;
         $datum['prefecture'] = $name;
         $r = Entry::create($datum);
