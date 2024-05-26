@@ -243,3 +243,17 @@ $datum = $request->validated();
 
     $request->session()->flash('front.task_upload_success', true);
     return redirect()->route('record', ['name' => $name]);
+    
+    
+    $datum = $request -> validated();
+        $datum['user_id'] = Auth::id();
+
+        $file = $request->file('photo');
+        $path = Storage::disk('s3')->put('photos', $file, 'public');
+        $URLPath = Storage::disk('s3')->url($path);
+        $datum['photo'] = $URLPath;
+        $datum['prefecture'] = $name;
+        $r = Entry::create($datum);
+
+        $request -> session() -> flash('front.task_upload_success',true);
+        return redirect()->route('record', ['name' => $name]);
